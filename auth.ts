@@ -6,6 +6,7 @@ import authConfig from '@/auth.config';
 import { getUserById } from '@/data/user';
 import { UserRole } from '@prisma/client';
 
+// auth config 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   callbacks: {
     async session({ token, session }) {
