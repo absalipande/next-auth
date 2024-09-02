@@ -13,7 +13,7 @@ import { CardWrapper } from '@/components/auth/card-wrapper';
 import { Button } from '@/components/ui/button';
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-succeess';
-import { login } from '@/actions/login';
+import { reset } from '@/actions/reset';
 
 export const ResetForm = () => {
   const [error, setError] = useState<string | undefined>('');
@@ -28,16 +28,12 @@ export const ResetForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof ResetSchema>) => {
-    setError('');
-    setSuccess('');
-
-    console.log(values)
-    // startTransition(() => {
-    //   login(values).then((data) => {
-    //     setError(data?.error);
-    //     setSuccess(data?.success);
-    //   });
-    // });
+    startTransition(async () => {
+      reset(values).then((data) => {
+        setError(data?.error);
+        setSuccess(data?.success);
+      });
+    });
   };
 
   return (
@@ -52,18 +48,16 @@ export const ResetForm = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} disabled={isPending} placeholder='yourname@example.com' type='email' />
+                    <Input {...field} placeholder='you@example.com' type='email' disabled={isPending} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-
           <FormError message={error} />
           <FormSuccess message={success} />
-
-          <Button type='submit' disabled={isPending} className='w-full'>
+          <Button type='submit' className='w-full' disabled={isPending}>
             Send reset email
           </Button>
         </form>
