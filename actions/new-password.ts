@@ -19,7 +19,7 @@ export const newPassword = async (values: z.infer<typeof NewPasswordSchema>, tok
   }
 
   const { password } = validatedFields.data;
-  const existingToken = await getPasswordResetTokenByToken(password);
+  const existingToken = await getPasswordResetTokenByToken(token);
   if (!existingToken) {
     return { error: 'Invalid token' };
   }
