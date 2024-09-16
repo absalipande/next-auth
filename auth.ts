@@ -29,7 +29,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       const existingUser = await getUserById(user.id as string);
       if (!existingUser?.emailVerified) return false;
 
-      // TODO: Add 2FA check
+      // Add 2FA check
+      if (existingUser.isTwoFactorEnabled) return false;
 
       return true;
     },

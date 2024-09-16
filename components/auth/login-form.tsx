@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { LoginSchema } from '@/schemas';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 import { CardWrapper } from '@/components/auth/card-wrapper';
 import { Button } from '@/components/ui/button';
@@ -23,6 +24,7 @@ export const LoginForm = () => {
 
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
+  const [showPassword, setShowPassword] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -71,7 +73,12 @@ export const LoginForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input {...field} disabled={isPending} placeholder='******' type='password' />
+                    <div className='relative'>
+                      <Input {...field} disabled={isPending} placeholder='******' type={showPassword ? 'text' : 'password'} />
+                      <button type='button' onClick={() => setShowPassword(!showPassword)} className='absolute right-3 top-2 text-gray-500'>
+                        {showPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
+                      </button>
+                    </div>
                   </FormControl>
 
                   <Button size='sm' variant='link' asChild className='px-0 font-normal'>
