@@ -100,7 +100,7 @@ const JsonLikeObject = ({ obj }: { obj: Record<string, any> }) => {
 };
 
 export const UserInfo = ({ user, label }: UserInfoProps) => {
-  const { isTwoFactorEnabled, ...restUser } = user || {};
+  const { image, isTwoFactorEnabled, ...restUser } = user || {};
   
   const extendedUser = {
     ...restUser,
