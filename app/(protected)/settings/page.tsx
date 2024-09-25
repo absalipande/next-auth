@@ -28,7 +28,10 @@ const SettingsPage = () => {
   const form = useForm<z.infer<typeof SettingsSchema>>({
     resolver: zodResolver(SettingsSchema),
     defaultValues: {
+      password: undefined,
+      newPassword: undefined,
       name: user?.name || undefined,
+      email: user?.email || undefined,
     },
   });
 
@@ -66,6 +69,45 @@ const SettingsPage = () => {
                     <FormLabel>Name</FormLabel>
                     <FormControl>
                       <Input placeholder='Your name' {...field} disabled={isPending} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name='email'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder='you@example.com' {...field} type='email' />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name='password'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input placeholder='******' {...field} type='password' />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name='newPassword'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>New Password</FormLabel>
+                    <FormControl>
+                      <Input placeholder='******' {...field} type='password' />
                     </FormControl>
                   </FormItem>
                 )}
