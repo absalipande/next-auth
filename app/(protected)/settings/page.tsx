@@ -14,7 +14,9 @@ import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-succeess';
 import { useCurrentUser } from '@/hooks/use-current-user';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormDescription, FormMessage } from '@/components/ui/form';
+import { UserRole } from '@prisma/client';
 
 const SettingsPage = () => {
   const user = useCurrentUser();
@@ -32,6 +34,7 @@ const SettingsPage = () => {
       newPassword: undefined,
       name: user?.name || undefined,
       email: user?.email || undefined,
+      role: user?.role || undefined,
     },
   });
 
@@ -109,6 +112,27 @@ const SettingsPage = () => {
                     <FormControl>
                       <Input placeholder='******' {...field} type='password' />
                     </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name='role'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Role</FormLabel>
+                    <Select disabled={isPending} onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder='Select a role' />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value={UserRole.ADMIN}>Admin</SelectItem>
+                        <SelectItem value={UserRole.USER}>User</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </FormItem>
                 )}
               />
