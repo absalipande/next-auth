@@ -73,6 +73,7 @@ const SettingsPage = () => {
                     <FormControl>
                       <Input placeholder='Your name' {...field} disabled={isPending} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -86,6 +87,7 @@ const SettingsPage = () => {
                     <FormControl>
                       <Input placeholder='you@example.com' {...field} type='email' />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -99,6 +101,7 @@ const SettingsPage = () => {
                     <FormControl>
                       <Input placeholder='******' {...field} type='password' />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -112,6 +115,7 @@ const SettingsPage = () => {
                     <FormControl>
                       <Input placeholder='******' {...field} type='password' />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -133,6 +137,7 @@ const SettingsPage = () => {
                         <SelectItem value={UserRole.USER}>User</SelectItem>
                       </SelectContent>
                     </Select>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
