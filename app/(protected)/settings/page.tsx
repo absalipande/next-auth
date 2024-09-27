@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react';
 import { SettingsSchema } from '@/schemas';
 import { Input } from '@/components/ui/input';
 import { settings } from '@/actions/settings';
+import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-succeess';
@@ -138,6 +139,22 @@ const SettingsPage = () => {
                       </SelectContent>
                     </Select>
                     <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name='isTwoFactorEnabled'
+                render={({ field }) => (
+                  <FormItem className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm'>
+                    <div className='space-y-0.5'>
+                      <FormLabel>Two Factor Authentication</FormLabel>
+                      <FormDescription>Enable two factor authentication for your account</FormDescription>
+                    </div>
+                    <FormControl>
+                      <Switch disabled={isPending} checked={field.value} onCheckedChange={field.onChange} />
+                    </FormControl>
                   </FormItem>
                 )}
               />
